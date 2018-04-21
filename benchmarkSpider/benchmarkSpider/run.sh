@@ -1,1 +1,1 @@
-scrapy crawl hackSpider
+scrapy crawl hackSpider -L WARNING
