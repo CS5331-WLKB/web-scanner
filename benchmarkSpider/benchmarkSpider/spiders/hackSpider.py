@@ -25,7 +25,6 @@ class HackspiderSpider(scrapy.Spider):
                     item['link_text'] = str(link_text[0].encode('utf-8').strip())
                 else:
                     item['link_text'] = None
-                print item['link'],   
-                print item['link_text']
+
                 yield item
 

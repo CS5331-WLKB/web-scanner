@@ -1,0 +1,8 @@
+import urllib, urllib2, os
+
+DT = 'Directory Traversal'
+
+path = os.path.dirname(os.path.abspath(__file__))
+
+def getHTML(base,params):
+    data = 
