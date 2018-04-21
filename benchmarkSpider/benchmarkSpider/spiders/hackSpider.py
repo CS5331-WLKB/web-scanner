@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from benchmarkSpider.items import hackItem
+from scrapy.http import Request
 
 class HackspiderSpider(scrapy.Spider):
     name = 'hackSpider'
@@ -15,8 +16,8 @@ class HackspiderSpider(scrapy.Spider):
             item = hackItem()
             link = str(link_sel.re('href="(.*?)"')[0])    
             if link:
-                if not link.startswith('http'):  
-                    link = response.url + link 
+                if not link.startswith('http'):
+                    link = response.urljoin(link)
                 yield scrapy.Request(link, callback=self.parse)  
                 item['link'] = link
                 link_text = link_sel.xpath('text()').extract()  
@@ -27,3 +28,4 @@ class HackspiderSpider(scrapy.Spider):
                 print item['link'],   
                 print item['link_text']
                 yield item
+
