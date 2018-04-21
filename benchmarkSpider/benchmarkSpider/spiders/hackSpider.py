@@ -2,11 +2,14 @@
 import scrapy
 from benchmarkSpider.items import hackItem
 from scrapy.http import Request
+from benchmarkSpider.utility import *
 
 class HackspiderSpider(scrapy.Spider):
     name = 'hackSpider'
-    allowed_domains = ['target.com']
-    start_urls = ['http://target.com/']
+    # allowed_domains = ['target.com']
+    # start_urls = ['http://target.com/']
+    allowed_domains = [domain]
+    start_urls = [start_url]
     
     def parse(self, response):
         sel = scrapy.Selector(response)

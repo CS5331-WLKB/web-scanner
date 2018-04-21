@@ -8,6 +8,6 @@
 {"link_text": "Fence\n                    Cats", "link": "http://target.com/directorytraversal/directorytraversal.php?ascii=fence.ascii"}
 {"link_text": "Stretchy\n                    Cat", "link": "http://target.com/directorytraversal/directorytraversal.php?ascii=stretch.ascii"}
 {"link_text": "Apples", "link": "http://target.com/serverside/serverside.php?page=apples"}
+{"link_text": "Click", "link": "http://target.com/openredirect/openredirect.php?redirect=success.html"}
 {"link_text": "Oranges", "link": "http://target.com/serverside/serverside.php?page=oranges"}
 {"link_text": "Bananas", "link": "http://target.com/serverside/serverside.php?page=bananas"}
-{"link_text": "Click", "link": "http://target.com/openredirect/openredirect.php?redirect=success.html"}
