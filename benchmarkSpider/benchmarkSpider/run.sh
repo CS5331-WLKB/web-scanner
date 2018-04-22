@@ -1,8 +1,8 @@
 #!/bin/bash
 rm result.json
-rm log
+rm log.txt
 
-scrapy crawl hackSpider -L WARNING --logfile=log
+scrapy crawl hackSpider -L WARNING --logfile=log.txt
 
 python hidden_resource.py
 

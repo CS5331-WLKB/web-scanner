@@ -5,5 +5,10 @@ lib/
 pip-selfcheck.json
 
 .idea
-.pyc
+benchmarkSpider/benchmarkSpider/*.pyc
+benchmarkSpider/benchmarkSpider/spiders/*.pyc
+benchmarkSpider/benchmarkSpider/log.txt
+benchmarkSpider/benchmarkSpider/result.json
+benchmarkSpider/benchmarkSpider/result/
+
 .py~
