@@ -8,7 +8,6 @@
 import json
 from scrapy.exceptions import DropItem
 import os
-from scanner import Scanner
 
 class hackPipeLine(object):
     def __init__(self):
@@ -20,10 +19,7 @@ class hackPipeLine(object):
         if item['link'] in self.seen:
             raise DropItem('Duplicate link %s' % item['link'])
         self.seen.add(item['link'])
-
-        myScanner = Scanner(item['link'])
-        myScanner.scan()
-        
+        print item['link']
         line = json.dumps(dict(item), ensure_ascii=False) + '\n'
         self.file.write(line)
         return item

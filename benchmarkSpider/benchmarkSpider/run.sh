@@ -1,7 +1,4 @@
 #!/bin/bash
 rm -rf result/*
-echo {} > result/DT_scope.json
-
-scrapy crawl hackSpider -L WARNING
-
-chmod +x result/DT_script.sh
+scrapy crawl hackSpider -L WARNING --logfile=log
+python hack.py

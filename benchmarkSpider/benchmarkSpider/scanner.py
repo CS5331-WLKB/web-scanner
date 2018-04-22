@@ -12,6 +12,17 @@ class Scanner(object):
         self.attack_script = ''
         self.safe = True
         self.category = ''
+        
+    def scan(self):
+        if (self.sqli() or
+            self.serverInj() or
+            self.dirTra() or
+            self.redir() or
+            self.csrf() or
+            self.shellInj()):
+            self.safe = False
+            
+        return self.safe
     
     def dirTra(self, depth=10):
         feed = ["etc/passwd"]
@@ -46,7 +57,9 @@ class Scanner(object):
         if hit:
             self.category = DT
             endpoint = urlparse(self.base).path
-            render[DT](endpoint,key_params,'GET')
+            scope, script = render[DT](endpoint,key_params,'GET')
+            self.vul_info = scope
+            self.attack_script = script
         return hit
                     
     def serverInj(self):
@@ -65,18 +78,6 @@ class Scanner(object):
     def csrf(self):
         return False
         
-    def scan(self):
-        if (self.sqli() or
-            self.serverInj() or
-            self.dirTra() or
-            self.redir() or
-            self.csrf() or
-            self.shellInj()):
-            self.safe = False
-            
-        if not self.safe:
-            print(self.category)
     
-
     
         
