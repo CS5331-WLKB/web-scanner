@@ -1,6 +1,7 @@
 import requests
 from utility import read_links, get_url, get_params, generate_url_with_params, get_success_message
 
+print '\n'
 print 'start open redirect '
 
 for link in read_links():

@@ -2,6 +2,7 @@ import requests
 import json
 from utility import read_links, get_success_message
 
+print '\n'
 print 'start sql injection'
 
 commons = 'sql_injection_commons.txt'

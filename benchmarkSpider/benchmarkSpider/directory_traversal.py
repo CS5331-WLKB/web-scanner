@@ -1,6 +1,7 @@
 import requests
 from utility import read_links, generate_url_with_params, get_success_message, get_url, get_params
 
+print '\n'
 print 'start directory traversal'
 
 feeds = ['etc/passwd']

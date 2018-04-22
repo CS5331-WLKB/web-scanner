@@ -1,6 +1,7 @@
 import requests
 from utility import start_url, get_success_message
 
+print '\n'
 print 'start hidden resource'
 
 commons = 'hidden_resource_commons.txt'
