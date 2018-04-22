@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from benchmarkSpider.items import hackItem
-from scrapy.http import Request
-from benchmarkSpider.utility import *
+from benchmarkSpider.items import HackItem
+from benchmarkSpider.utility import domain, start_url
+
 
 class HackspiderSpider(scrapy.Spider):
     name = 'hackSpider'
@@ -16,7 +16,7 @@ class HackspiderSpider(scrapy.Spider):
         links_in_a_page = sel.xpath('//a[@href]') 
 
         for link_sel in links_in_a_page:
-            item = hackItem()
+            item = HackItem()
             link = str(link_sel.re('href="(.*?)"')[0])    
             if link:
                 if not link.startswith('http'):
