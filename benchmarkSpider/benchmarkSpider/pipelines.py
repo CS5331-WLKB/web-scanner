@@ -7,13 +7,12 @@
 
 import json
 from scrapy.exceptions import DropItem
-import os
-import codecs
+from utility import resultpath
 
 class hackPipeLine(object):
     def __init__(self):
-        self.path = os.path.dirname(os.path.abspath(__file__))+'/result/'+'url_result.json'
-        self.seen = set()  
+        self.path = resultpath
+        self.seen = set()
 
     def process_item(self, item, spider):
         if item['link'] in self.seen:

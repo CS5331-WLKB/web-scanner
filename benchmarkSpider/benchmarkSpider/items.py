@@ -7,9 +7,8 @@
 
 import scrapy
 
-class hackItem(scrapy.Item):
+
+class HackItem(scrapy.Item):
     # define the fields for your item here like:
     link = scrapy.Field()
     link_text = scrapy.Field()
-        
-   
