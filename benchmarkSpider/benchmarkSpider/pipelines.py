@@ -8,18 +8,19 @@
 import json
 from scrapy.exceptions import DropItem
 import os
+import codecs
 
 class hackPipeLine(object):
     def __init__(self):
-        path = os.path.dirname(os.path.abspath(__file__))
-        self.file = open(path+'/result/'+'url_result.json', 'w+')
+        self.path = os.path.dirname(os.path.abspath(__file__))+'/result/'+'url_result.json'
         self.seen = set()  
 
     def process_item(self, item, spider):
         if item['link'] in self.seen:
             raise DropItem('Duplicate link %s' % item['link'])
         self.seen.add(item['link'])
-        print item['link']
+
         line = json.dumps(dict(item), ensure_ascii=False) + '\n'
-        self.file.write(line)
+        with open(self.path, 'a') as f:
+            f.write(line)
         return item

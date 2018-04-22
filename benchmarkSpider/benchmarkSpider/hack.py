@@ -2,15 +2,22 @@ import json
 import sys
 from scanner import Scanner
 from utility import *
+import time
+
 
 hackHub = {}
-data = {}
+data = []
+data_path = path+'/result/url_result.json'
+
+time.sleep(1)
+
 try:
-    with open(path+'/result/url_result.json','w') as f:
+    with open(data_path,'r') as f:
         try: 
-            data = json.load(f)
+            for line in f.readlines():
+                data.append((str(json.loads(line)['link'])))
         except ValueError:
-            print 'fail to load json file'
+            print 'fail to load url file'
             
 except IOError:
     print 'fail to open url json file'
@@ -18,7 +25,7 @@ except IOError:
 def updateHackHub(obj):
     category = obj.category
     scope = obj.vul_info
-    if(hackHub[category]):
+    if(DT in hackHub):
         hackHub[category]['result'][start_url]+=scope['result'][start_url]
     else:
         hackHub[category]=scope
@@ -36,13 +43,13 @@ def saveScope():
         scope = hackHub[key]
         with open(file_name,'w+') as f:
             json.dump(scope,f)
-    
+
 if data:
-    links = [d['link'] for d in data]
     for link in data:
         hack = Scanner(link)
+        hack.scan()
         if not hack.safe:
             updateHackHub(hack)
-            savescript(hack,len(hackHub[hack.category]['result'][start_url]))
+            saveScript(hack,len(hackHub[hack.category]['result'][start_url]))
     saveScope()
         
