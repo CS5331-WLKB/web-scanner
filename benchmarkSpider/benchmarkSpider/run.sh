@@ -11,3 +11,5 @@ python sql_injection.py
 python directory_traversal.py
 
 python open_redirect.py
+
+chmod +x result/*.sh
