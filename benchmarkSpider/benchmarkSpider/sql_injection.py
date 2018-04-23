@@ -6,7 +6,6 @@ from generator import generator, render
 
 banner(SI)
 
-
 result = read_result()
 links = result['link']
 commons = 'sql_injection_commons.txt'

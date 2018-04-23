@@ -13,7 +13,7 @@ class HackspiderSpider(scrapy.Spider):
     def parse(self, response):
         sel = scrapy.Selector(response)
         links = sel.xpath('//a[@href]') 
-        inputs = sel.xpath('//input[@name]')
+        input_names = sel.xpath('//input[@name]').xpath('@name').extract()
 
         for link_sel in links:
             item = HackItem()
@@ -26,11 +26,9 @@ class HackspiderSpider(scrapy.Spider):
                 item['content'] = link
                 yield item
         
-        for input_sel in inputs:
+        for name in input_names:
             item = HackItem()
             item['tag'] ='input'
-            name = str(input_sel.re('name="(*)"')[0])
-            print name
             if name:
                 item['content'] = name
                 yield item

@@ -2,7 +2,6 @@ import requests
 from generator import render, generator
 from utility import *
 
-
 banner(DT)
 
 feeds = ['etc/passwd']
@@ -39,8 +38,8 @@ for link in links:
                         scope, script = render[DT](endpoint,params,method)
                         DT_generator.updateScope(scope)
                         DT_generator.saveScript(script)                        
-                        print get_success_message(fullURL)
+                        success_message(fullURL)
             i = i + 1
             
 DT_generator.saveScope()
-print 'finish directory traversal'
+

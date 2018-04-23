@@ -19,7 +19,6 @@ SCI = 'Shell Command Injection'
 path = os.path.dirname(os.path.abspath(__file__))
 resultpath = os.path.join(path, 'result/result.json')
 
-
 def read_result():
     result = {}
 
