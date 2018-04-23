@@ -1,10 +1,10 @@
 import requests
+
 import json
-from utility import read_result, get_success_message,SI
+from utility import *
 from generator import generator, render
 
-print '\n'
-print 'start sql injection'
+banner(SI)
 
 
 result = read_result()
@@ -22,6 +22,6 @@ for link in links:
         }
         req = requests.post(link, data=payload)
         if req.content.find('We found you') != -1:
-            print get_success_message(link + ' ' + json.dumps(payload))
+            success_message(link + '\t' + json.dumps(payload))
 
-print 'finish sql injection'
+print '\n'

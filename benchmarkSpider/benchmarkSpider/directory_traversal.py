@@ -1,9 +1,9 @@
 import requests
 from generator import render, generator
-from utility import read_result, generate_url_with_params, get_success_message, get_url, get_params, DT
+from utility import *
 
-print '\n'
-print 'start directory traversal'
+
+banner(DT)
 
 feeds = ['etc/passwd']
 nuggets = ['root:x:0:0:root:/root:/bin/bash']
