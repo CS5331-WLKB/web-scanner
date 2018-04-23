@@ -34,14 +34,14 @@ def read_result():
         print 'fail to open url json file'
 
 def read_links():
-    links = []
+    links = set([])
     try:
         with open(resultpath,'r') as f:
             try: 
                 for line in f.readlines():
                     link = str(json.loads(line)['link'])
-                    links.append(link)
-                return links
+                    links.add(link)
+                return list(links)
             except ValueError:
                 print 'fail to load url file'
     except IOError:

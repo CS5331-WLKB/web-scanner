@@ -12,14 +12,16 @@ from utility import resultpath
 class hackPipeLine(object):
     def __init__(self):
         self.path = resultpath
-        self.seen = set()
+        #self.seen = set()
 
     def process_item(self, item, spider):
+        '''
         if item['link'] in self.seen:
             raise DropItem('Duplicate link %s' % item['link'])
         else :
             self.seen.add(item['link'])
-
+        '''
+    
         line = json.dumps(dict(item), ensure_ascii=False) + '\n'
 
         with open(self.path, 'a') as f:

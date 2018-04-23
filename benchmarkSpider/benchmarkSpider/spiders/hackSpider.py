@@ -36,10 +36,27 @@ class HackspiderSpider(CrawlSpider):
         item= HackItem()
         sel = scrapy.Selector(response)
         input_names = sel.xpath('//input[@name]').xpath('@name').extract()
+        links = sel.xpath('//a[@href]')
+        
         item['link'] = response.url
         item['content'] = input_names
         item['content_type'] = 'input names'
-        yield item
+
+        items = [item]
+        
+        for link_sel in links:
+            l = str(link_sel.re('href="(.*?)"')[0])
+            if l:
+                if not l.startswith('http'):
+                    link = response.urljoin(l)
+                    temp_item = HackItem()
+                    temp_item['link'] = link
+                    temp_item['content'] = []
+                    temp_item['content_type'] = 'input names'
+                    items.append(temp_item)
+
+        for item in items:
+            yield item
 
         
     
