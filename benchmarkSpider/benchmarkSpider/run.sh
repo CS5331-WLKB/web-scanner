@@ -1,5 +1,5 @@
 #!/bin/bash
-rm result.json
+rm result/*
 rm log.txt
 
 scrapy crawl hackSpider -L WARNING --logfile=log.txt

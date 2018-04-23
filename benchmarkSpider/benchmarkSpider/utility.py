@@ -16,7 +16,7 @@ SSCI = 'Server Side Code Injection'
 SCI = 'Shell Command Injection'
 
 path = os.path.dirname(os.path.abspath(__file__))
-resultpath = os.path.join(path, 'result.json')
+resultpath = os.path.join(path, 'result/result.json')
 
 def read_links():
     links = []

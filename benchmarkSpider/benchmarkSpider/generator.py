@@ -1,17 +1,6 @@
 from utility import *
 import json
-'''
-def saveScope(name,scope):
-    with open(name, 'rb') as f:
-        data = json.load(f,encoding='utf-8')
-    if(data.keys()):
-       data['result'][start_url]+=scope['result'][start_url]
-       print data
-    else:
-        data = scope
-    with open(name,'wb') as f:
-        json.dump(data,f,encoding='utf-8')
-'''        
+
 def genDT(endpoint,params,method):
     scope = {
         'class':DT,
@@ -24,16 +13,9 @@ def genDT(endpoint,params,method):
                 }
             ]
         }
-    }
-    
+    }    
     scope_name = path + '/result/DT_scope.json'
-    
-    '''
-    saveScope(scope_name,scope)
-    with open(scope_name,'w+') as f:
-        json.dump(scope,f)
-    '''
-    
+        
     script = 'curl '+start_url+endpoint+'?'
     keys = params.keys()
     values = params.values()
@@ -41,10 +23,6 @@ def genDT(endpoint,params,method):
     evil_param = '&'.join(pair)
     script+=evil_param
     script_name = path+'/result/DT_script.sh'
-    '''
-    with open(script_name,'w+') as f:
-        f.write(script)
-    ''' 
     return scope, script
 
 def genSI():
@@ -62,7 +40,6 @@ def genCSRF():
 def genOR():
     pass
 
-
 render = {
     DT: genDT,
     SI: genSI,
@@ -71,3 +48,28 @@ render = {
     SSCI: genSSCI,
     SCI: genSCI
 }
+
+class generator(object):
+    def __init__(self,category):
+        self.scope = {}
+        self.category = category
+        self.cate_str = '_'.join(category.split(' '))
+        self.count = 0
+        
+    def updateScope(self,scope):
+        if(self.count):
+            self.scope['result'][start_url]+=scope['result'][start_url]
+        else:
+            self.scope=scope
+        self.count += 1
+        
+    def saveScript(self,script):
+        script_name = 'result/'+self.cate_str+'_attack'+str(self.count)+'.sh'
+        with open(script_name, 'w') as f:
+            f.write(script)
+
+    def saveScope(self):
+        file_name = 'result/'+self.cate_str+'_scope.json'
+        with open(file_name,'w+') as f:
+            json.dump(self.scope,f)
+
