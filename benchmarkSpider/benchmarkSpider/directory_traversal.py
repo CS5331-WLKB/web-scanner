@@ -12,9 +12,10 @@ collector = {}
 DT_generator = generator(DT)
 
 method = 'GET'
-links = read_links()
+results = read_results()
 
-for link in links:
+for result in results:
+    link = result['link']
     url = get_url(link)
     params = get_params(url)
     hit = False
@@ -42,3 +43,4 @@ for link in links:
             
 DT_generator.saveScope()
 
+print '\n'

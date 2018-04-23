@@ -1,5 +1,4 @@
 import requests
-import json
 from utility import *
 from generator import generator, render
 
@@ -7,7 +6,7 @@ banner(SI)
 
 method = 'POST'
 
-results = read_result()
+results = read_results()
 
 commons = 'sql_injection_commons.txt'
 nugget = 'We found you!'
@@ -17,9 +16,9 @@ injections = f.read().splitlines()
 
 SI_generator = generator(SI)
 
-for obj in results:
-    link = obj['link']
-    input_names = obj['content']
+for result in results:
+    link = result['link']
+    input_names = result['content']
     url = get_url(link)
     if len(input_names):
         for injection in injections:
@@ -31,10 +30,11 @@ for obj in results:
                 if req.content.find(nugget) != -1:
                     endpoint = url.path
                     params = payload
-                    scope,script = render[SI](endpoint,params,method)
+                    scope, script = render[SI](endpoint, params, method)
                     SI_generator.updateScope(scope)
                     SI_generator.saveScript(script)
                     success_message(link + '\t' + json.dumps(payload))
 
 SI_generator.saveScope()
+
 print '\n'
