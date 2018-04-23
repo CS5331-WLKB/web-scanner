@@ -15,12 +15,13 @@ class hackPipeLine(object):
         self.seen = set()
 
     def process_item(self, item, spider):
-        if item['tag'] == 'link' and item['content'] in self.seen:
-            raise DropItem('Duplicate link %s' % item['content'])
-        elif item['tag'] == 'link':
-            self.seen.add(item['content'])
+        if item['link'] in self.seen:
+            raise DropItem('Duplicate link %s' % item['link'])
+        else :
+            self.seen.add(item['link'])
 
         line = json.dumps(dict(item), ensure_ascii=False) + '\n'
+
         with open(self.path, 'a') as f:
             f.write(line)
         return item

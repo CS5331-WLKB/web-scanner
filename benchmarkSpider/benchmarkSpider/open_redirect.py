@@ -1,11 +1,8 @@
 import requests
 from utility import *
 
-
 banner(OR)
-
-result = read_result()
-links = result['link']
+links = read_links()
 
 for link in links:
     url = get_url(link)

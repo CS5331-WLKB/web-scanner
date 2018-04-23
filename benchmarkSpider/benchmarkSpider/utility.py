@@ -20,25 +20,32 @@ path = os.path.dirname(os.path.abspath(__file__))
 resultpath = os.path.join(path, 'result/result.json')
 
 def read_result():
-    result = {}
-
+    results = []
     try:
         with open(resultpath,'r') as f:
             try: 
                 for line in f.readlines():
-                    obj = json.loads(line)
-                    tag = str(obj['tag'])
-                    content = str(obj['content'])
-                    if(tag in result):
-                        result[tag].append(content)
-                    else:
-                        result[tag] = [content]
-                return result
+                    result = json.loads(line)
+                    results.append(result)
+                return results
             except ValueError:
                 print 'fail to load url file'
     except IOError:
         print 'fail to open url json file'
 
+def read_links():
+    links = []
+    try:
+        with open(resultpath,'r') as f:
+            try: 
+                for line in f.readlines():
+                    link = str(json.loads(line)['link'])
+                    links.append(link)
+                return links
+            except ValueError:
+                print 'fail to load url file'
+    except IOError:
+        print 'fail to open url json file'
 
 def get_url(link):
     return urlparse.urlparse(link)

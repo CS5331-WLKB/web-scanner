@@ -12,8 +12,7 @@ collector = {}
 DT_generator = generator(DT)
 
 method = 'GET'
-result = read_result()
-links = result['link']
+links = read_links()
 
 for link in links:
     url = get_url(link)

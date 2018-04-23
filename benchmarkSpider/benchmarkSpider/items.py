@@ -9,5 +9,6 @@ import scrapy
 
 class HackItem(scrapy.Item):
     # define the fields for your item here like:
-    tag = scrapy.Field()
+    link = scrapy.Field()
     content = scrapy.Field()
+    content_type = scrapy.Field()
