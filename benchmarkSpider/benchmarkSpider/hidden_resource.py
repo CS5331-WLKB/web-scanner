@@ -1,8 +1,7 @@
 import requests
-from utility import start_url, get_success_message
+from utility import *
 
-print '\n'
-print 'start hidden resource'
+banner(HR)
 
 commons = 'hidden_resource_commons.txt'
 f = open(commons, 'r')
@@ -19,10 +18,6 @@ for injection in injections:
         code = str(first.status_code)
 
     if '200' <= code < '300':
-        print get_success_message(url + '\t' + code)
+        success_message(url + '\t' + code)
 
-print 'finish hidden resource'
-
-
-
-
+print '\n'

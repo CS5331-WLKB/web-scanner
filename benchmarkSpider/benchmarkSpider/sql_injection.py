@@ -1,9 +1,7 @@
 import requests
-import json
-from utility import read_links, get_success_message
+from utility import *
 
-print '\n'
-print 'start sql injection'
+banner(SI)
 
 commons = 'sql_injection_commons.txt'
 f = open(commons, 'r')
@@ -16,6 +14,6 @@ for link in read_links():
         }
         req = requests.post(link, data=payload)
         if req.content.find('We found you') != -1:
-            print get_success_message(link + ' ' + json.dumps(payload))
+            success_message(link + '\t' + json.dumps(payload))
 
-print 'finish sql injection'
+print '\n'

