@@ -15,6 +15,7 @@ CSRF = 'CSRF'
 OR = 'Open Redirect'
 SSCI = 'Server Side Code Injection'
 SCI = 'Shell Command Injection'
+HP = 'Hack Password'
 
 path = os.path.dirname(os.path.abspath(__file__))
 resultpath = os.path.join(path, 'result/result.json')
