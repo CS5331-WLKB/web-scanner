@@ -1,10 +1,13 @@
 import requests
-from utility import read_links, get_url, get_params, generate_url_with_params, get_success_message
+from utility import read_result, get_url, get_params, generate_url_with_params, get_success_message, OR
 
 print '\n'
 print 'start open redirect '
 
-for link in read_links():
+result = read_result()
+links = result['link']
+
+for link in links:
     url = get_url(link)
     params = get_params(url)
     params['redirect'] = 'https://www.google.com'

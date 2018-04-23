@@ -18,15 +18,20 @@ SCI = 'Shell Command Injection'
 path = os.path.dirname(os.path.abspath(__file__))
 resultpath = os.path.join(path, 'result/result.json')
 
-def read_links():
-    links = []
+def read_result():
+    result = {}
     try:
         with open(resultpath,'r') as f:
             try: 
                 for line in f.readlines():
-                    link = str(json.loads(line)['link'])
-                    links.append(link)
-                return links
+                    obj = json.loads(line)
+                    tag = str(obj['tag'])
+                    content = str(obj['content'])
+                    if(tag in result):
+                        result[tag].append(content)
+                    else:
+                        result[tag] = [content]
+                return result
             except ValueError:
                 print 'fail to load url file'
     except IOError:

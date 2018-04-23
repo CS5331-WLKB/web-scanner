@@ -1,6 +1,6 @@
 import requests
 from generator import render, generator
-from utility import read_links, generate_url_with_params, get_success_message, get_url, get_params, DT
+from utility import read_result, generate_url_with_params, get_success_message, get_url, get_params, DT
 
 print '\n'
 print 'start directory traversal'
@@ -13,7 +13,10 @@ collector = {}
 DT_generator = generator(DT)
 
 method = 'GET'
-for link in read_links():
+result = read_result()
+links = result['link']
+
+for link in links:
     url = get_url(link)
     params = get_params(url)
     hit = False
