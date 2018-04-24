@@ -13,4 +13,6 @@ python directory_traversal.py
 
 python open_redirect.py
 
+python command_injection.py
+
 chmod +x result/*.sh
