@@ -1,7 +1,7 @@
 #!/bin/bash
+mkdir -p result
 rm result/*
 rm log.txt
-mkdir result
 
 scrapy crawl hackSpider -L WARNING --logfile=log.txt
 

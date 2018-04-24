@@ -35,6 +35,8 @@ def genDT(endpoint,params,method):
     script = ''
     if method == 'GET':
         script = createGetScript(endpoint, params)
+    else:
+        script = createPostScript(endpoint, params)
         
     return scope, script
 
@@ -51,14 +53,36 @@ def genSI(endpoint, params, method):
             ]
         }
     }
-
+    
+    script = ''
     if method == 'POST':
         script = createPostScript(endpoint,params)
+    else:
+        script = createGetScript(endpoint,params)
     
     return scope, script
 
-def genSCI():
-    pass
+def genSCI(endpoint, params, method):
+    scope = {
+        'class':SCI,
+        'results':{
+            start_url: [
+                {
+                    'endpoint': endpoint,
+                    'params': params,
+                    'method': method
+                }
+            ]
+        }
+    }
+
+    script = ''
+    if method == 'POST':
+        script = createPostScript(endpoint,params)
+    else:
+        script = createGetScript(endpoint,params)
+    
+    return scope, script
 
 def genSSCI():
     pass
@@ -83,7 +107,8 @@ def genOR(endpoint, params, method):
     script = ''
     if method == 'GET':
         script = createGetScript(endpoint, params)
-        
+    else:
+        script = createPostScript(endpoint, params)
     return scope, script  
 
 render = {
