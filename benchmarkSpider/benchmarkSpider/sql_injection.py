@@ -4,19 +4,27 @@ from generator import generator, render
 
 banner(SI)
 
-method = 'POST'
-
 results = read_results()
 
 commons = 'sql_injection_commons.txt'
-nugget = 'We found you!'
+nuggets = ['We found you!']
 
 f = open(commons, 'r')
 injections = f.read().splitlines()
+f.close()
 
 SI_generator = generator(SI)
 
+links = set([])
+
 for result in results:
+    link = result['link']
+    links.add(link)
+
+links = list(links)
+
+for result in results:
+    method = 'POST'
     link = result['link']
     input_names = result['content']
     url = get_url(link)
@@ -27,14 +35,35 @@ for result in results:
                     p: injection
                 }
                 req = requests.post(link, data=payload)
-                if req.content.find(nugget) != -1:
-                    endpoint = url.path
-                    params = payload
-                    scope, script = render[SI](endpoint, params, method)
-                    SI_generator.updateScope(scope)
-                    SI_generator.saveScript(script)
-                    success_message(link + '\t' + json.dumps(payload))
+                for nugget in nuggets:
+                    if req.content.find(nugget) != -1:
+                        endpoint = url.path
+                        params = payload
+                        scope, script = render[SI](endpoint, params, method)
+                        SI_generator.updateScope(scope)
+                        SI_generator.saveScript(script)
+                        success_message(link + '\t' + json.dumps(payload))
 
+for link in links:
+    method = 'GET'
+    link = result['link']
+    input_names = result['content']
+    url = get_url(link)
+    params = get_params(url)
+    if len(params.keys()):
+        for injection in injections:
+            for p in params:
+                params[p] = injection
+                fullURL = generate_url_with_params(url,params)
+                req = requests.get(fullURL)
+                for nugget in nuggets:
+                    if req.content.find(nugget) != -1:
+                        endpoint = url.path
+                        scope, script = render[SI](endpoint, params, method)
+                        SI_generator.updateScope(scope)
+                        SI_generator.saveScript(script)
+                        success_message(link + '\t' + json.dumps(payload))
+    
 SI_generator.saveScope()
 
 print '\n'
