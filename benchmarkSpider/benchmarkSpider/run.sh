@@ -15,4 +15,6 @@ python open_redirect.py
 
 python command_injection.py
 
+python new_post.py
+
 chmod +x result/*.sh

@@ -5,8 +5,8 @@ import json
 import urlparse
 from termcolor import colored
 
-domain = 'target.com'
-start_url = 'http://target.com'
+domain = 'ap-southeast-1.compute.amazonaws.com'
+start_url = 'http://ec2-52-77-212-149.ap-southeast-1.compute.amazonaws.com:8080'
 
 HR = 'Hidden Resource'
 DT = 'Directory Traversal'

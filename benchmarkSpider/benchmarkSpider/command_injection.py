@@ -6,7 +6,7 @@ banner(SCI)
 
 results = read_results()
 
-nuggets = ['root:x:0:0:root:/root:/bin/bash', 'Linux benchmark']
+nuggets = ['root:x:0:0:root:/root:/bin/bash', 'Linux']
 
 injections = [';uname -a',';cat /etc/passwd']
 

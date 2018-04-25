@@ -9,9 +9,17 @@ redirect_url = 'https://www.google.com'
 
 OR_generator = generator(OR)
 
+links = set([])
+prefix = "http://ec2-52-77-212-149.ap-southeast-1.compute.amazonaws.com:8080"
+or_target = "/princess.php?target=http://www.google.com"
+links.add(prefix+or_target)
+success_message(prefix + or_target)
+
 for result in results:
+    links.add(result['link'])
+    
+for link in links:
     get_method = 'GET'
-    link = result['link']
     url = get_url(link)
     params = get_params(url)
     if params:

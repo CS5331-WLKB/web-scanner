@@ -35,12 +35,13 @@ class HackspiderSpider(CrawlSpider):
     def parse_item(self,response):
         item= HackItem()
         sel = scrapy.Selector(response)
-        input_names = sel.xpath('//input[@name]').xpath('@name').extract()
+        #input_names = sel.xpath('//input[@name]').xpath('@name').extract()
+        #script = sel.xpath('//script').xpath("text()").extract()
         links = sel.xpath('//a[@href]')
-        
+        pre = sel.xpath("//pre").xpath("text()").extract()
         item['link'] = response.url
-        item['content'] = input_names
-        item['content_type'] = 'input names'
+        item['content'] = pre
+        item['content_type'] = 'pre'
 
         items = [item]
         
